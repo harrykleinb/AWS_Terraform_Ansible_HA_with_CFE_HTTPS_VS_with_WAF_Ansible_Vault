@@ -1,9 +1,9 @@
 # AWS_Terraform_Ansible_HA_with_CFE_HTTPS_VS_with_WAF_Ansible_Vault
 
 <H1>Environment Deployed</H1>
-VS HTTPS with a WAF Policy
-VS HTTP Redirect
-Pool with Service Discovery
+VS HTTPS with a WAF Policy<BR>
+VS HTTP Redirect<BR>
+Pool with Service Discovery<BR>
 Arcadia Application Servers in an AWS Auto Scale Group
 
 
