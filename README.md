@@ -12,6 +12,10 @@
   <li>AS3 used for VS configuration</li>
 </ul>
 
+Terraform is used to create the objects into AWS.<BR>
+Ansible is used to POST the Toolchain Declarations.<BR>
+F5 Terraform Provider can't be used because BIGIP must be reachable when the Provider inits during the Terraform plan. That will be possible in a next version of Terraform.
+
 <H1>Preparing a Valid SSL Cert which will be used into AS3</H1>
 Create a PFX/pkcs12 file which includes the cert and private key.
 You can do it with openssl : openssl pkcs12 -export -in file.crt -inkey file.key -out file.pfx 
