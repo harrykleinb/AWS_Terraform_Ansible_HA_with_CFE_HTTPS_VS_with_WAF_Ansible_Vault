@@ -1,0 +1,74 @@
+---
+#Create config on first boot 
+- name: Change Admin PWD
+  hosts: "{{ bigip_ip }}"
+  gather_facts: no
+
+  vars:
+    bigip: f2a70b4b-d375-4e9c-b108-2ec311274be4.access.udf.f5.com
+    user: admin
+    admin_pwd: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39616637313161633630316261386262636538346239363337303837313833356131646132636532
+          6435303365323836643832636130376564646634326631650a663430303839653136626638326530
+          62646633326232646634336261356630666531646362633337363861626333663162373732396436
+          3965376530336665620a326166613333653163333936626662326533326330343863626536326639
+          3063
+
+  tasks:  
+  - name: Pause play until a URL is reachable from this host
+    uri:
+      url: "https://{{ bigip_ip }}/mgmt/shared/"
+      follow_redirects: none
+      method: GET
+      validate_certs: no
+    register: result_httpd
+    until: result_httpd.status == 401
+    retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
+    delay: 5 # Every 5 seconds
+    ignore_errors: yes
+    delegate_to: 127.0.0.1
+
+  - name: Result HTTP Daemon Status
+    debug:
+      var: result_httpd.status
+
+  - name: Wait until BIG-IP is ready to make changes
+    raw: "run /util bash -c 'cat /var/prompt/ps1'"
+    until: (result_ready.stdout.find("Active") != -1 or result_ready.stdout.find("Standby") != -1 or result_ready.stdout.find("NO LICENSE") != -1)
+    register: result_ready
+    retries: 60
+    delay: 10
+    ignore_errors: yes
+
+  - name: Result Ready Output
+    debug:
+      var: result_ready
+
+  - name: Modify Admin Password
+    raw: modify auth user {{ user }} password {{ admin_pwd }}
+    register: result_admin_pwd
+
+  - name: Result Admin Pwd Modification
+    debug:
+      var: result_admin_pwd
+
+#Save config
+  - name: Save System Config
+    raw: save sys config 
+    register: result_save
+
+  - name: Result Save Output
+    debug:
+      var: result_save
+
+
+
+  - name: Disable Failover built-in scripts
+    raw: "run /util bash -c 'mount -o remount,rw /usr; mv /usr/libexec/aws/aws-failover-tgactive.sh /usr/libexec/aws/aws-failover-tgactive.sh.disabled; mv /usr/libexec/aws/aws-failover-tgrefresh.sh /usr/libexec/aws/aws-failover-tgrefresh.sh.disabled; mount -o remount,ro /usr'"
+    register: result_disable_failover_scripts
+
+  - name: Result Disable Scripts  Output
+    debug:
+      var: result_disable_failover_scripts
+

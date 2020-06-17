@@ -1,0 +1,33 @@
+---
+- name: Send DO 
+  hosts: localhost 
+  connection: local
+
+  vars:
+    bigip: f2a70b4b-d375-4e9c-b108-2ec311274be4.access.udf.f5.com
+    user: admin
+    password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39616637313161633630316261386262636538346239363337303837313833356131646132636532
+          6435303365323836643832636130376564646634326631650a663430303839653136626638326530
+          62646633326232646634336261356630666531646362633337363861626333663162373732396436
+          3965376530336665620a326166613333653163333936626662326533326330343863626536326639
+          3063
+
+  tasks:
+   - name: Send DO Declaration to BIGIP 
+     template:
+       src: "DO_Template.j2"
+       dest: "DO_{{ host }}.json"
+   - name: Send declaration
+     uri:
+        url: "https://{{ bigip }}/mgmt/shared/declarative-onboarding"
+        method: POST
+        user: "{{ user }}"
+        password: "{{ password }}"
+        body: "{{ lookup('file','DO_{{ host }}.json') }}"
+        status_code: 202
+        timeout: 300
+        body_format: json
+        validate_certs: no
+

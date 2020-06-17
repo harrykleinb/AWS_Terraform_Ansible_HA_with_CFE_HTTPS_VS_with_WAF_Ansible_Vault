@@ -1,0 +1,65 @@
+{
+   "class":"ADC",
+   "schemaVersion":"3.5.0",
+   "id": "5489432",
+   "{{Tenant_Name}}":{
+      "class":"Tenant",
+      "{{App_Name}}":{
+         "class":"Application",
+         "template":"generic",
+         "{{App_Name}}_vs_https":{
+            "remark":"{{App_Name}}.demo.com",
+            "class":"Service_HTTPS",
+            "virtualAddresses":[
+               "{{VIP}}"
+            ],
+            "virtualPort":443,
+            "redirect80": true,
+            "snat":"auto",
+            "policyWAF":{
+               "use":"{{App_Name}}_waf"
+            },
+            "pool":"{{App_Name}}_pool",
+            "serverTLS": "cs_ssl_profile_{{ App_Name }}",
+         },
+         "{{App_Name}}_pool":{
+            "class":"Pool",
+            "monitors":[
+               "http"
+            ],
+            "members":[
+               {
+                  "servicePort":80,
+                  "addressDiscovery":"aws",
+                  "updateInterval":1,
+                  "tagKey":"PoolMemberOf",
+                  "tagValue":"F5",
+                  "addressRealm":"private",
+                  "region":"{{Region}}"
+               }
+            ]
+         },
+         "cs_ssl_profile_{{ App_Name }}": {
+            "class": "TLS_Server",
+            "certificates": [{
+                "certificate": "ssl_cert_{{ App_Name }}"
+             }]
+         },
+         "ssl_cert_{{ App_Name }}": {
+            "class": "Certificate",
+            "passphrase": {
+                              "ciphertext": "{{ passphrase | string | b64encode }}",
+                              "protected": "eyJhbGciOiJkaXIiLCJlbmMiOiJmNXN2In0",
+                              "ignoreChanges": true
+                        },
+                    "pkcs12": { "url": "https://github.com/harrykleinb/remotefiles/blob/master/www.checkfive.fr.pfx?raw=true"}
+          },
+         "{{App_Name}}_waf":{
+            "class":"WAF_Policy",
+            "url":"https://raw.githubusercontent.com/f5devcentral/f5-asm-policy-templates/master/generic_ready_template/Rapid_Depolyment_Policy_13_1.xml",
+            "ignoreChanges":false
+         }
+      }
+   }
+}
+

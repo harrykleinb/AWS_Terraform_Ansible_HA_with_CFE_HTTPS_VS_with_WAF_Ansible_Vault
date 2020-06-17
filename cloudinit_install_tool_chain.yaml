@@ -1,0 +1,10 @@
+#cloud-config
+tmos_declared:
+  enabled: true
+  icontrollx_trusted_sources: false
+  icontrollx_package_urls:
+    - "${cfe_repo_url}"
+    - "${as3_repo_url}"
+    - "${ts_repo_url}"
+    - "${do_repo_url}"
+
