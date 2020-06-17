@@ -1,5 +1,12 @@
 # AWS_Terraform_Ansible_HA_with_CFE_HTTPS_VS_with_WAF_Ansible_Vault
 
+<H1>Environment Deployed</H1>
+VS HTTPS with a WAF Policy
+VS HTTP Redirect
+Pool with Service Discovery
+Arcadia Application Servers in an AWS Auto Scale Group
+
+
 
 <H1>Preparing a Valid SSL Cert which will be used into AS3</H1>
 Create a PFX/pkcs12 file which includes the cert and private key.
