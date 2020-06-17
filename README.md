@@ -27,7 +27,9 @@ Replace the pkcs12 url with yours into the file AS3_Template.j2.
 
 Create a file where you have your password in it : echo "default" > ~/.vault_pass.txt
 
-create the ansible vault env variable with the command <b><i>export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt</i></b> or add the line <b><i>vault_password_file=~/.vault_pass.txt</i></b> into the ansible.cfg file in case Terraform doesn't have access to the env variables of Ansible
+Create the ansible vault env variable with the command <b><i>export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt</i></b><BR>
+
+Add the line <b><i>vault_password_file=~/.vault_pass.txt</i></b> into the ansible.cfg file (looks like Terraform doesn't have access to the env variables of Ansible)
 
 Encrypt your bigip password: ansible-vault encrypt_string 'SanDiego123!' --name 'password'
 
