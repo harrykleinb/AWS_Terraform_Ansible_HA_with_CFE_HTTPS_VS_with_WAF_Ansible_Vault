@@ -4,8 +4,11 @@
 VS HTTPS with a WAF Policy<BR>
 VS HTTP Redirect<BR>
 Pool with Service Discovery<BR>
-Arcadia Application Servers in an AWS Auto Scale Group
-
+Arcadia Application Servers in an AWS Auto Scale Group and the associated tags for service discovery<BR>
+Cloudinit is used for installation of the Tool Chain only<BR>
+DO used for preparing the BIGIPs (Vlans, Self-IPs, NTP, Modules, DSC, etc)<BR>
+CFE used for BIGIP HA in AWS<BR>
+AS3 used for VS configuration
 
 
 <H1>Preparing a Valid SSL Cert which will be used into AS3</H1>
