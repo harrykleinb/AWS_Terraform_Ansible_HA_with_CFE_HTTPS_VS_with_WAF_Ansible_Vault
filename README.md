@@ -1,15 +1,16 @@
 # AWS_Terraform_Ansible_HA_with_CFE_HTTPS_VS_with_WAF_Ansible_Vault
 
 <H1>Environment Deployed</H1>
-VS HTTPS with a WAF Policy<BR>
-VS HTTP Redirect<BR>
-Pool with Service Discovery<BR>
-Arcadia Application Servers in an AWS Auto Scale Group and the associated tags for service discovery<BR>
-Cloudinit is used for installation of the Tool Chain only<BR>
-DO used for preparing the BIGIPs (Vlans, Self-IPs, NTP, Modules, DSC, etc)<BR>
-CFE used for BIGIP HA in AWS<BR>
-AS3 used for VS configuration
-
+<ul>
+  <li>VS HTTPS with a WAF Policy</li><BR>
+  <li>VS HTTP Redirect</li><BR>
+  <li>Pool with Service Discovery</li><BR>
+  <li>Arcadia Application Servers in an AWS Auto Scale Group and the associated tags for service discovery</li><BR>
+  <li>Cloudinit is used for installation of the Tool Chain only</li><BR>
+  <li>DO used for preparing the BIGIPs (Vlans, Self-IPs, NTP, Modules, DSC, etc)</li><BR>
+  <li>CFE used for BIGIP HA in AWS</li><BR>
+  <li>AS3 used for VS configuration</li>
+</ul>
 
 <H1>Preparing a Valid SSL Cert which will be used into AS3</H1>
 Create a PFX/pkcs12 file which includes the cert and private key.
