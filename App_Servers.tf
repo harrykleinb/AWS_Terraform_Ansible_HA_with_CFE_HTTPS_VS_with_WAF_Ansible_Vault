@@ -27,6 +27,21 @@ resource "aws_security_group" "AppServers" {
 }
 
 
+
+/*
+# Ubuntu Image
+data "aws_ami" "ubuntu_ami" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+  }
+  owners =["aws-marketplace"]
+}
+*/
+
+
+
 resource "aws_launch_configuration" "web_conf" {
   name                        = "web_config"
   image_id                    = "ami-07f0057f4527a40ad"
@@ -35,7 +50,7 @@ resource "aws_launch_configuration" "web_conf" {
   security_groups             = [aws_security_group.AppServers.id] 
   user_data                   = file("install_arcadia.sh")
 
-  #modify to true in case you need to connect directlty to the servers
+#modify to true in case you need to connect directlty to the servers
   associate_public_ip_address = false
 }
 
