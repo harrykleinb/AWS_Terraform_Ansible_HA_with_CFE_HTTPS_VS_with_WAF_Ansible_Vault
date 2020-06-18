@@ -88,6 +88,64 @@ variable "restrictedMgmtAddress" {
 
 #################
 
+#FOR BIG_IP
+
+#################
+
+variable "internal_subnet_bigip" {
+  description = "CIDR of the private Subnet of BIG_IPs"
+  default     = "172.42.20.0/24"
+}
+
+variable "external_subnet_bigip" {
+  description = "CIDR of the Subnet for external Subnet of BIG_IPs"
+  default     = "172.42.30.0/24"
+}
+
+
+variable "external_selfip_bigip1" {
+  default    = "172.42.30.11"
+}
+
+
+variable "external_selfip_bigip2" {
+  default    = "172.42.30.12"
+}
+
+
+variable "internal_selfip_bigip1" {
+  default    = "172.42.20.11"
+}
+
+
+variable "internal_selfip_bigip2" {
+  default    = "172.42.20.12"
+}
+
+
+variable "management_bigip1" {
+  default    = "172.42.10.51"
+}
+
+
+variable "management_bigip2" {
+  default    = "172.42.10.52"
+}
+
+
+variable "IP_VS_1" {
+  default   = "172.42.30.80"
+}
+
+
+variable "admin_user" {
+  default    = "admin"
+}
+
+
+
+#################
+
 #FOR Cloudinit
 
 #################
@@ -177,62 +235,6 @@ variable "advisory_bigip2" {
 }
 
 
-
-#################
-
-#FOR BIG_IP
-
-#################
-
-variable "internal_subnet_bigip" {
-  description = "CIDR of the private Subnet of BIG_IPs"
-  default     = "172.42.20.0/24"
-}
-
-variable "external_subnet_bigip" {
-  description = "CIDR of the Subnet for external Subnet of BIG_IPs"
-  default     = "172.42.30.0/24"
-}
-
-
-variable "external_selfip_bigip1" {
-  default    = "172.42.30.11"
-}
-
-
-variable "external_selfip_bigip2" {
-  default    = "172.42.30.12"
-}
-
-
-variable "internal_selfip_bigip1" {
-  default    = "172.42.20.11"
-}
-
-
-variable "internal_selfip_bigip2" {
-  default    = "172.42.20.12"
-}
-
-
-variable "management_bigip1" {
-  default    = "172.42.10.51"
-}
-
-
-variable "management_bigip2" {
-  default    = "172.42.10.52"
-}
-
-
-variable "IP_VS_1" {
-  default   = "172.42.30.80"
-}
-
-
-variable "admin_user" {
-  default    = "admin"
-}
 
 
 #################
