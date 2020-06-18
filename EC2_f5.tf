@@ -1,14 +1,14 @@
 #Security Group pour Management BIG-IP
 
 resource "aws_security_group" "BIG_IP" {
-  name   = "${var.user_id}_f5_Mngt_BIG_IP"
+  name   = "${var.user_id}_f5_BIG_IP"
   vpc_id = aws_vpc.vpc_lab.id
 
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["${var.restrictedMgmtAddress}","${var.bigiq_Mngt_IP}/32"]
+    cidr_blocks = ["${var.restrictedMgmtAddress}"]
   }
 
   ingress {
@@ -29,7 +29,7 @@ resource "aws_security_group" "BIG_IP" {
     from_port   = 8
     to_port     = 0
     protocol    = "icmp"
-    cidr_blocks = ["${var.restrictedMgmtAddress}","${var.bigiq_Mngt_IP}/32"]
+    cidr_blocks = ["${var.restrictedMgmtAddress}"]
   }
 
 
@@ -49,7 +49,7 @@ resource "aws_security_group" "BIG_IP" {
 
 
   tags = {
-    Name = "${var.user_id}_f5_Mngt_bigIP"
+    Name = "${var.user_id}_f5_bigIP"
   }
 }
 
