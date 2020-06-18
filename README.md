@@ -21,8 +21,8 @@ F5 Terraform Provider can't be used because BIGIP must be reachable when the Pro
 Edit the file <i>variable.tf</i>
 Modify the variables to reflect your own setup. For instance, replace some vars with your:
 <ul>
-  <li>userid/li><BR>
-  <li>aws account id/li><BR>
+  <li>userid</li><BR>
+  <li>aws account id</li><BR>
   <li>private aws key</li><BR>
   <li>aws region</li><BR>
   <li>IP addresses</li><BR>
