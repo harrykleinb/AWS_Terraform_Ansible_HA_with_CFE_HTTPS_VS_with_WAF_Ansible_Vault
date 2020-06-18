@@ -49,9 +49,8 @@ resource "aws_launch_configuration" "web_conf" {
   key_name                    = var.aws_keypair
   security_groups             = [aws_security_group.AppServers.id] 
   user_data                   = file("install_arcadia.sh")
-
-#modify to true in case you need to connect directlty to the servers
-  associate_public_ip_address = false
+  
+  associate_public_ip_address = true
 }
 
 
