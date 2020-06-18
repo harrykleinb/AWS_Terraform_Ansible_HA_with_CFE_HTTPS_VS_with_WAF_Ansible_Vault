@@ -3,6 +3,7 @@
 <H1>Environment Deployed</H1>
 <ul>
   <li>A pair of BIG-IPs in HA (AWS API)</li><BR>
+  <li>BIG-IPs have 3 NICS : mgmt, external, internal</li><BR>
   <li>VS HTTPS with a WAF Policy</li><BR>
   <li>VS HTTP Redirect</li><BR>
   <li>Pool with Service Discovery</li><BR>
