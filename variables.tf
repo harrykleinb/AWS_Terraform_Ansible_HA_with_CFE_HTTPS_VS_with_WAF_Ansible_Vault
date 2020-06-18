@@ -32,6 +32,60 @@ variable "account_id_aws" {
 }
 
 
+
+#################
+
+#INFRA
+
+#################
+
+variable "vpc_lab_cidr" {
+  description = "CIDR of the LAB"
+  default     = "172.42.0.0/16"
+}
+
+variable "mgmt_subnet" {
+  description = "CIDR of the Management Subnet"
+  default     = "172.42.10.0/24"
+}
+
+variable "mgmt_subnet_b" {
+  description = "CIDR of the Management Subnet in us-east-1b"
+  default     = "172.42.11.0/24"
+}
+
+
+variable "mgmt_sub_list" {
+  type        = list(string)
+  description = "Format List to be used into Securty Groups "
+
+  default = ["172.42.10.0/24"]
+}
+
+
+variable "restrictedSrcAddress" {
+  type        = list(string)
+  description = "Lock down management access by source IP address or network. Format is subnet/mask between []. Use a comma to separate several adresses. "
+
+  #That is the Client Public IP addresses used to manage the BIGIPs
+
+  default = ["109.7.65.101/32","109.7.65.102/32","86.242.11.19/32","172.42.10.0/24","92.184.97.175/32"]
+}
+
+
+/*
+var restrictedMgmtAddress in string format instead of list. 
+List isn't allowed into the CFT which is used to deploy the bigips
+That is the Client Public IP addresses used to manage the BIGIPs
+*/
+
+variable "restrictedMgmtAddress" {
+  description = "Format IP/Masklength. In string format."
+  default     = "0.0.0.0/0"
+}
+
+
+
 #################
 
 #FOR Cloudinit
@@ -126,88 +180,6 @@ variable "advisory_bigip2" {
 
 #################
 
-#INFRA
-
-#################
-
-variable "vpc_lab_cidr" {
-  description = "CIDR of the LAB"
-  default     = "172.42.0.0/16"
-}
-
-variable "mgmt_subnet" {
-  description = "CIDR of the Management Subnet"
-  default     = "172.42.10.0/24"
-}
-
-variable "mgmt_subnet_b" {
-  description = "CIDR of the Management Subnet in us-east-1b"
-  default     = "172.42.11.0/24"
-}
-
-
-variable "mgmt_sub_list" {
-  type        = list(string)
-  description = "Format List to be used into Securty Groups "
-
-  default = ["172.42.10.0/24"]
-}
-
-
-variable "restrictedSrcAddress" {
-  type        = list(string)
-  description = "Lock down management access by source IP address or network. Format is subnet/mask between []. Use a comma to separate several adresses. "
-
-  #That is the Client Public IP addresses used to manage the BIGIPs
-
-  default = ["109.7.65.101/32","109.7.65.102/32","86.242.11.19/32","172.42.10.0/24","92.184.97.175/32"]
-}
-
-
-/*
-var restrictedMgmtAddress in string format instead of list. 
-List isn't allowed into the CFT which is used to deploy the bigips
-That is the Client Public IP addresses used to manage the BIGIPs
-*/
-
-variable "restrictedMgmtAddress" {
-  description = "Format IP/Masklength. In string format."
-  default     = "0.0.0.0/0"
-}
-
-
-
-#################
-
-#FOR BIG_IQ BYOL 7.0.0.1 Oct, 4 2019
-
-#################
-
-
-variable "bigiq_ami" {
-  description = "AMI based on AWS Region"
-  type = map(string)
-  default = {
-    us-east-1    = "ami-09cd0faf029ac7746"
-    us-west-1    = "aami-05e14d844b0b28686"
-    eu-central-1 = "ami-0f40f1ea8191faa1a"
-    eu-west-1    = "ami-046af572233671cec"
-  }
-}
-
-variable "bigiq_Mngt_IP" {
-  description = "Management IP address of the BigIQ License Manage. Must be into the Management Subnet defined in section INFRA above."
-  default     = "172.42.10.42"
-}
-
-variable "Licenses_Pool" {
-  description = "Name of the License Pool on the BIG-IQ"
-  default     = "Pool_BEST_1G"
-}
-
-
-#################
-
 #FOR BIG_IP
 
 #################
@@ -261,11 +233,6 @@ variable "IP_VS_1" {
 variable "admin_user" {
   default    = "admin"
 }
-
-variable "bigip_admin_password" {
-  default    = "Admin4ever1!"
-}
-
 
 
 #################
