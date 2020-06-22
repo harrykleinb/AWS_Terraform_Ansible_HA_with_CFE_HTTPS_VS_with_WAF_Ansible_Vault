@@ -46,7 +46,7 @@ Create the ansible vault env variable with the command <b><i>export ANSIBLE_VAUL
 
 Add the line <b><i>vault_password_file=~/.vault_pass.txt</i></b> into the ansible.cfg file (looks like Terraform doesn't have access to the env variables of Ansible)
 
-Encrypt your bigip password: ansible-vault encrypt_string 'SanDiego123!' --name 'password'
+Encrypt your bigip password: ansible-vault encrypt_string 'SanDiego123!' --name 'admin_pwd'
 
 Encrypt your PFX cert and key passphrase: ansible-vault encrypt_string 'default' --name 'passphrase'
 
