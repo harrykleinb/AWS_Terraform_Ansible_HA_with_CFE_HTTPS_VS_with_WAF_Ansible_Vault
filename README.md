@@ -49,8 +49,8 @@ Add the line <b><i>vault_password_file=~/.vault_pass.txt</i></b> into the ansibl
 Encrypt your bigip password (for instance BIGIPpwd123!) and set it into the vault admin_pwd variable: <BR>
   <b><i>ansible-vault encrypt_string 'BIGIPpwd123!' --name 'admin_pwd'</i></b>
 
-Encrypt your PFX cert and its key passphrase: <br>
+Encrypt the passphrase (for instance default) of your PFX cert and set it into the vault passphrase variable: <br>
   <b><i>ansible-vault encrypt_string 'default' --name 'passphrase'</i></b>
 
-Replace the vars password and passphrase with yours into the Playbooks.
+Replace the names of the vars admin_pwd and passphrase with yours into the Playbooks which use them.
 
