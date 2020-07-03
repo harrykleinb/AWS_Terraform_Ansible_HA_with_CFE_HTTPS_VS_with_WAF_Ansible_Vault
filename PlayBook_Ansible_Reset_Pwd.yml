@@ -5,7 +5,6 @@
   gather_facts: no
 
   vars:
-    bigip: f2a70b4b-d375-4e9c-b108-2ec311274be4.access.udf.f5.com
     user: admin
     admin_pwd: !vault |
           $ANSIBLE_VAULT;1.1;AES256
